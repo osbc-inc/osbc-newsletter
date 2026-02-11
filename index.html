@@ -169,15 +169,36 @@ body{
 }
 
 #subscribeModal .modal-inner{
-  background:#fff;
-  padding:35px;
+  background:#ffffff;
+  padding:40px 36px 36px;
   width:420px;
   max-width:95%;
+  position:relative;
+  border:none;            /* 테두리 제거 */
+  box-shadow:none;        /* 그림자 제거 */
 }
 
-.stb_form_submit_button{
-  background:#2B5876 !important;
-  color:#fff !important;
+/* X 버튼 */
+
+.modal-close{
+  position:absolute;
+  top:16px;
+  right:18px;
+  font-size:20px;
+  font-weight:600;
+  cursor:pointer;
+  color:#666;
+}
+
+.modal-close:hover{
+  color:#111;
+}
+
+/* Stibee 기본 테두리 제거 */
+
+.stb_form{
+  border:none !important;
+  box-shadow:none !important;
 }
 </style>
 </head>
@@ -247,7 +268,11 @@ body{
 <!-- SUBSCRIBE MODAL -->
 <div id="subscribeModal">
   <div class="modal-inner">
-    
+    <div id="subscribeModal">
+    <div class="modal-inner">
+    <div class="modal-close" onclick="closeSubscribe()">×</div>
+    <div id="stb_subscribe">
+
     <div id="stb_subscribe">
       <form action="https://stibee.com/api/v1.0/lists/_tzOHhn0vxS8HLjXpFctnomv-ap8hg==/public/subscribers"
         method="POST"
@@ -301,6 +326,17 @@ window.addEventListener("scroll", function(){
     header.classList.add("scrolled");
   } else {
     header.classList.remove("scrolled");
+  }
+});
+
+function closeSubscribe(){
+  document.getElementById("subscribeModal").style.display="none";
+}
+
+/* ESC 키 닫기 */
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){
+    closeSubscribe();
   }
 });
 
