@@ -13,104 +13,178 @@ body{
   margin:0;
   background:#f3f5f8;
   font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',Arial,sans-serif;
+  color:#222;
 }
 
+/* ===== HEADER ===== */
 .header{
   background:linear-gradient(135deg,#2b5876,#4e4376);
-  padding:60px 20px;
+  padding:28px 20px 32px;
   text-align:center;
   color:#fff;
 }
 
-.logo{width:140px;margin-bottom:18px;}
+.header img{
+  width:110px;
+  margin-bottom:10px;
+}
 
+.header h1{
+  margin:6px 0 6px;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:0.5px;
+}
+
+.header p{
+  margin:0;
+  font-size:13px;
+  opacity:0.85;
+}
+
+/* ===== HERO ===== */
 .hero{
   max-width:1100px;
-  margin:50px auto;
+  margin:40px auto;
   padding:0 20px;
 }
 
+.hero-card{
+  background:#fff;
+  padding:0;
+  text-decoration:none;
+  color:#222;
+  display:block;
+  border:1px solid #e5e7eb;
+}
+
+.hero-card img{
+  width:100%;
+  display:block;
+}
+
+.hero-card .content{
+  padding:22px 24px;
+}
+
+.hero-card h2{
+  margin:0 0 8px;
+  font-size:20px;
+}
+
+.hero-card p{
+  margin:0;
+  font-size:14px;
+  color:#555;
+}
+
+/* ===== GRID ===== */
 .grid-wrapper{
   max-width:1100px;
   margin:0 auto 80px;
   padding:0 20px;
 }
 
+.year-group{
+  font-size:18px;
+  font-weight:700;
+  margin:50px 0 18px;
+  color:#444;
+  border-bottom:1px solid #e5e7eb;
+  padding-bottom:6px;
+}
+
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:28px;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:24px;
 }
 
 .card{
   background:#fff;
-  border-radius:16px;
-  padding:24px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.06);
+  border:1px solid #e5e7eb;
   text-decoration:none;
-  color:#333;
-  transition:transform .15s ease;
+  color:#222;
+  display:block;
+  transition:all .15s ease;
 }
 
 .card:hover{
-  transform:translateY(-4px);
+  border-color:#cbd5e1;
 }
 
 .card img{
   width:100%;
-  border-radius:10px;
-  margin-bottom:16px;
+  display:block;
 }
 
-.card h2,
+.card .content{
+  padding:18px 18px 20px;
+}
+
 .card h3{
-  margin:0 0 10px;
+  margin:0 0 8px;
+  font-size:16px;
   font-weight:700;
 }
 
 .card p{
   margin:0;
-  color:#555;
+  font-size:13px;
+  color:#666;
   line-height:1.6;
-  font-size:15px;
 }
 
-.year-group{
-  font-size:22px;
-  font-weight:700;
-  margin:60px 0 20px;
+/* ===== FOOTER ===== */
+.footer{
+  background:linear-gradient(135deg,#1e1e1e,#2d2d2d);
+  color:#fff;
+  padding:60px 20px;
 }
 
-.pagination{
-  text-align:center;
-  margin:40px 0 80px;
+.footer-inner{
+  max-width:1100px;
+  margin:0 auto;
 }
 
-.pagination a{
-  margin:0 12px;
-  text-decoration:none;
-  color:#2b5876;
-  font-weight:600;
+.footer h2{
+  margin:0 0 20px;
+  font-size:32px;
+  letter-spacing:1px;
+}
+
+.footer p{
+  margin:6px 0;
+  font-size:14px;
+  opacity:0.85;
+}
+
+.footer .copyright{
+  margin-top:30px;
+  font-size:13px;
+  opacity:0.6;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div class="header">
-  <img class="logo"
-  src="{{ '/assets/OSBC%20Logo_White.png' | relative_url }}">
+  <img src="{{ '/assets/OSBC%20Logo_White.png' | relative_url }}">
   <h1>OSBC LETTER</h1>
   <p>공식 뉴스레터 아카이브</p>
 </div>
 
-<!-- 최신글 Hero -->
+<!-- HERO (최신글) -->
 {% assign latest = site.posts.first %}
 <div class="hero">
-  <a href="{{ latest.url | relative_url }}" class="card">
+  <a href="{{ latest.url | relative_url }}" class="hero-card">
     <img src="{{ latest.cover | relative_url }}">
-    <h2>{{ latest.title }}</h2>
-    <p>{{ latest.summary }}</p>
+    <div class="content">
+      <h2>{{ latest.title }}</h2>
+      <p>{{ latest.summary }}</p>
+    </div>
   </a>
 </div>
 
@@ -133,12 +207,27 @@ body{
 
   <a href="{{ post.url | relative_url }}" class="card">
     <img src="{{ post.cover | relative_url }}">
-    <h3>{{ post.title }}</h3>
-    <p>{{ post.summary }}</p>
+    <div class="content">
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.summary }}</p>
+    </div>
   </a>
 
 {% endfor %}
 </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-inner">
+    <h2>OSBC</h2>
+    <p>오에스비씨(주)</p>
+    <p>서울특별시 강남구 영동대로 511 (삼성동, 트레이드타워) 3306호</p>
+    <p>대표번호 02-538-9227  |  FAX 02-538-9228</p>
+    <div class="copyright">
+      Copyright (C) OSBC Inc. All rights reserved.
+    </div>
+  </div>
 </div>
 
 </body>
