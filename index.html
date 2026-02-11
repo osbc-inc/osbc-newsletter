@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>OSBC LETTER</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{margin:0;background:#f3f5f8;font-family:'Noto Sans KR',sans-serif;}
+.header{
+background:linear-gradient(135deg,#2b5876,#4e4376);
+padding:60px 20px;
+text-align:center;
+color:#fff;
+}
+.logo{width:140px;margin-bottom:18px;}
+.hero{max-width:1100px;margin:40px auto;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px;}
+.card{
+background:#fff;border-radius:16px;padding:24px;
+box-shadow:0 12px 30px rgba(0,0,0,0.06);
+text-decoration:none;color:#333;
+}
+.card img{width:100%;border-radius:10px;margin-bottom:12px;}
+.year-group{max-width:1100px;margin:60px auto 20px;font-size:22px;font-weight:700;}
+.pagination{text-align:center;margin:40px;}
+.pagination a{margin:0 10px;text-decoration:none;color:#2b5876;}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<img class="logo"
+src="https://raw.githubusercontent.com/osbc-inc/osbc-newsletter/main/OSBC%20Logo_White.png">
+<h1>OSBC LETTER</h1>
+<p>공식 뉴스레터 아카이브</p>
+</div>
+
+<div class="hero">
+{% assign latest = site.posts.first %}
+<a href="{{ latest.url }}" class="card">
+<img src="{{ latest.cover }}">
+<h2>{{ latest.title }}</h2>
+<p>{{ latest.excerpt }}</p>
+</a>
+</div>
+
+{% assign current_year = "" %}
+<div class="grid">
+{% for post in paginator.posts %}
+  {% assign post_year = post.date | date: "%Y" %}
+  {% if post_year != current_year %}
+    </div>
+    <div class="year-group">{{ post_year }}</div>
+    <div class="grid">
+    {% assign current_year = post_year %}
+  {% endif %}
+  <a href="{{ post.url }}" class="card">
+    <img src="{{ post.cover }}">
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.excerpt }}</p>
+  </a>
+{% endfor %}
+</div>
+
+<div class="pagination">
+{% if paginator.previous_page %}
+<a href="{{ paginator.previous_page_path }}">← Previous</a>
+{% endif %}
+{% if paginator.next_page %}
+<a href="{{ paginator.next_page_path }}">Next →</a>
+{% endif %}
+</div>
+
+</body>
+</html>
