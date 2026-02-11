@@ -8,6 +8,8 @@
 <title>OSBC LETTER</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="https://resource.stibee.com/subscribe/stb_subscribe_form_style.css">
+
 <style>
 body{
   margin:0;
@@ -22,7 +24,7 @@ body{
   top:0;
   left:0;
   width:100%;
-  height:70px;
+  height:64px;
   background:linear-gradient(135deg,#2b5876,#4e4376);
   display:flex;
   align-items:center;
@@ -51,20 +53,21 @@ body{
 }
 
 .header-left img{
-  height:34px;
+  height:32px;
 }
 
 .header-title{
   color:#fff;
-  font-size:14px;
+  font-size:13px;
   font-weight:600;
+  letter-spacing:.5px;
 }
 
 .subscribe-btn{
   background:#fff;
   color:#2b5876;
   border:none;
-  padding:8px 16px;
+  padding:7px 14px;
   font-weight:600;
   cursor:pointer;
 }
@@ -76,7 +79,7 @@ body{
 /* CONTENT */
 
 .main{
-  padding-top:110px;
+  padding-top:100px;
 }
 
 .hero{
@@ -87,7 +90,7 @@ body{
 
 .card{
   background:#fff;
-  padding:22px;
+  padding:20px;
   border:1px solid #e5e7eb;
   text-decoration:none;
   color:#222;
@@ -97,7 +100,7 @@ body{
 .card img{
   width:100%;
   display:block;
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 
 .card h2, .card h3{
@@ -120,19 +123,19 @@ body{
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:30px;
+  gap:28px;
 }
 
 .year-group{
   font-size:20px;
   font-weight:700;
-  margin:70px 0 20px;
+  margin:60px 0 20px;
 }
 
 /* FOOTER */
 
 .footer{
-  background:#1b1b1b;
+  background:#222; /* 완전검정 대신 차콜 */
   color:#ccc;
   padding:50px 20px;
 }
@@ -143,7 +146,7 @@ body{
 }
 
 .footer-logo{
-  height:40px;
+  height:38px;
   margin-bottom:18px;
 }
 
@@ -153,44 +156,28 @@ body{
   color:#aaa;
 }
 
-/* MODAL */
+/* STIBEE MODAL CUSTOM */
 
-.modal{
+#subscribeModal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.4);
+  background:rgba(0,0,0,.45);
   display:none;
   align-items:center;
   justify-content:center;
   z-index:1000;
 }
 
-.modal-content{
+#subscribeModal .modal-inner{
   background:#fff;
-  padding:30px;
-  width:400px;
-  max-width:90%;
+  padding:35px;
+  width:420px;
+  max-width:95%;
 }
 
-.modal input[type=email]{
-  width:100%;
-  padding:10px;
-  margin-bottom:12px;
-  border:1px solid #ddd;
-}
-
-.modal label{
-  font-size:13px;
-}
-
-.modal button{
-  margin-top:15px;
-  width:100%;
-  padding:10px;
-  background:#2b5876;
-  color:#fff;
-  border:none;
-  cursor:pointer;
+.stb_form_submit_button{
+  background:#2B5876 !important;
+  color:#fff !important;
 }
 </style>
 </head>
@@ -203,7 +190,7 @@ body{
       <img src="{{ '/assets/OSBC%20Logo_White.png' | relative_url }}">
       <div class="header-title">OSBC LETTER</div>
     </div>
-    <button class="subscribe-btn" onclick="openModal()">뉴스레터 구독</button>
+    <button class="subscribe-btn" onclick="openSubscribe()">뉴스레터 구독</button>
   </div>
 </div>
 
@@ -245,6 +232,7 @@ body{
 
 </div>
 
+<!-- FOOTER -->
 <div class="footer">
   <div class="footer-inner">
     <img class="footer-logo"
@@ -256,17 +244,55 @@ body{
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-content">
-    <h3>뉴스레터 구독</h3>
-    <input type="email" placeholder="이메일 주소 입력">
-    <label>
-      <input type="checkbox"> 개인정보 수집 및 마케팅 수신에 동의합니다.
-    </label>
-    <button>신청하기</button>
+<!-- SUBSCRIBE MODAL -->
+<div id="subscribeModal">
+  <div class="modal-inner">
+    
+    <div id="stb_subscribe">
+      <form action="https://stibee.com/api/v1.0/lists/_tzOHhn0vxS8HLjXpFctnomv-ap8hg==/public/subscribers"
+        method="POST"
+        target="_blank"
+        accept-charset="utf-8"
+        class="stb_form"
+        novalidate>
+
+        <h1 class="stb_form_title">OSBC LETTER 구독하기</h1>
+
+        <fieldset class="stb_form_set">
+          <label class="stb_form_set_label">이메일 주소<span class="stb_asterisk">*</span></label>
+          <input type="text" class="stb_form_set_input" name="email" required>
+        </fieldset>
+
+        <fieldset class="stb_form_set">
+          <label class="stb_form_set_label">이름<span class="stb_asterisk">*</span></label>
+          <input type="text" class="stb_form_set_input" name="name" required>
+        </fieldset>
+
+        <fieldset class="stb_form_set">
+          <label class="stb_form_set_label">회사명<span class="stb_asterisk">*</span></label>
+          <input type="text" class="stb_form_set_input" name="company" required>
+        </fieldset>
+
+        <div class="stb_form_policy">
+          <label>
+            <input type="checkbox" required>
+            (필수) 개인정보 수집 및 이용에 동의합니다.
+          </label>
+        </div>
+
+        <fieldset class="stb_form_set_submit">
+          <button type="submit" class="stb_form_submit_button">
+            구독하기
+          </button>
+        </fieldset>
+
+      </form>
+    </div>
+
   </div>
 </div>
+
+<script src="https://resource.stibee.com/subscribe/stb_subscribe_form.js"></script>
 
 <script>
 window.addEventListener("scroll", function(){
@@ -278,12 +304,12 @@ window.addEventListener("scroll", function(){
   }
 });
 
-function openModal(){
-  document.getElementById("modal").style.display="flex";
+function openSubscribe(){
+  document.getElementById("subscribeModal").style.display="flex";
 }
 
-document.getElementById("modal").addEventListener("click", function(e){
-  if(e.target.id==="modal"){
+document.getElementById("subscribeModal").addEventListener("click", function(e){
+  if(e.target.id==="subscribeModal"){
     this.style.display="none";
   }
 });
