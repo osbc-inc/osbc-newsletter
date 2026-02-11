@@ -268,50 +268,63 @@ body{
 <!-- SUBSCRIBE MODAL -->
 <div id="subscribeModal">
   <div class="modal-inner">
-    <div id="subscribeModal">
-    <div class="modal-inner">
+
     <div class="modal-close" onclick="closeSubscribe()">×</div>
-    <div id="stb_subscribe">
 
     <div id="stb_subscribe">
+
       <form action="https://stibee.com/api/v1.0/lists/_tzOHhn0vxS8HLjXpFctnomv-ap8hg==/public/subscribers"
         method="POST"
         target="_blank"
         accept-charset="utf-8"
         class="stb_form"
+        id="stb_subscribe_form"
         novalidate>
 
         <h1 class="stb_form_title">OSBC LETTER 구독하기</h1>
 
         <fieldset class="stb_form_set">
-          <label class="stb_form_set_label">이메일 주소<span class="stb_asterisk">*</span></label>
-          <input type="text" class="stb_form_set_input" name="email" required>
+          <label for="stb_email" class="stb_form_set_label">
+            이메일 주소<span class="stb_asterisk">*</span>
+          </label>
+          <input type="text" class="stb_form_set_input" id="stb_email" name="email" required>
+          <div class="stb_form_msg_error" id="stb_email_error"></div>
         </fieldset>
 
         <fieldset class="stb_form_set">
-          <label class="stb_form_set_label">이름<span class="stb_asterisk">*</span></label>
-          <input type="text" class="stb_form_set_input" name="name" required>
+          <label for="stb_name" class="stb_form_set_label">
+            이름<span class="stb_asterisk">*</span>
+          </label>
+          <input type="text" class="stb_form_set_input" id="stb_name" name="name" required>
+          <div class="stb_form_msg_error" id="stb_name_error"></div>
         </fieldset>
 
         <fieldset class="stb_form_set">
-          <label class="stb_form_set_label">회사명<span class="stb_asterisk">*</span></label>
-          <input type="text" class="stb_form_set_input" name="company" required>
+          <label for="stb_company" class="stb_form_set_label">
+            회사명<span class="stb_asterisk">*</span>
+          </label>
+          <input type="text" class="stb_form_set_input" id="stb_company" name="company" required>
+          <div class="stb_form_msg_error" id="stb_company_error"></div>
         </fieldset>
 
         <div class="stb_form_policy">
           <label>
-            <input type="checkbox" required>
-            (필수) 개인정보 수집 및 이용에 동의합니다.
+            <input type="checkbox" id="stb_policy" required>
+            <span>(필수)</span> 개인정보 수집 및 이용에 동의합니다.
           </label>
+          <div class="stb_form_msg_error" id="stb_policy_error"></div>
         </div>
 
         <fieldset class="stb_form_set_submit">
-          <button type="submit" class="stb_form_submit_button">
+          <button type="submit"
+            class="stb_form_submit_button"
+            style="background-color:#2B5876;color:#ffffff;">
             구독하기
           </button>
         </fieldset>
 
       </form>
+
     </div>
 
   </div>
