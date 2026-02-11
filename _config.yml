@@ -1,0 +1,13 @@
+title: OSBC LETTER
+description: OSBC 공식 뉴스레터 아카이브
+baseurl: "/osbc-newsletter"
+url: "https://osbc-inc.github.io"
+
+markdown: kramdown
+
+paginate: 6
+paginate_path: "/page:num/"
+
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
