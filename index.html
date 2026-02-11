@@ -13,133 +13,130 @@ body{
   margin:0;
   background:#f3f5f8;
   font-family:'Noto Sans KR','Apple SD Gothic Neo','Malgun Gothic',Arial,sans-serif;
-  color:#222;
 }
 
-/* ===== HEADER ===== */
+/* =========================
+   HEADER (Fixed, Apple-like)
+========================= */
+
 .header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:70px;
   background:linear-gradient(135deg,#2b5876,#4e4376);
-  padding:28px 20px 32px;
-  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  transition:all .25s ease;
+}
+
+.header-inner{
+  width:1100px;
+  max-width:95%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.header-left img{
+  height:36px;
+}
+
+.header-title{
   color:#fff;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.4px;
 }
 
-.header img{
-  width:110px;
-  margin-bottom:10px;
+/* 스크롤 시 약간 반투명 */
+.header.scrolled{
+  background:rgba(43,88,118,.85);
+  backdrop-filter:blur(8px);
 }
 
-.header h1{
-  margin:6px 0 6px;
-  font-size:22px;
-  font-weight:700;
-  letter-spacing:0.5px;
+/* =========================
+   CONTENT WRAP
+========================= */
+
+.main{
+  padding-top:110px;
 }
 
-.header p{
-  margin:0;
-  font-size:13px;
-  opacity:0.85;
-}
-
-/* ===== HERO ===== */
 .hero{
   max-width:1100px;
   margin:40px auto;
   padding:0 20px;
 }
 
-.hero-card{
-  background:#fff;
-  padding:0;
-  text-decoration:none;
-  color:#222;
-  display:block;
-  border:1px solid #e5e7eb;
-}
-
-.hero-card img{
-  width:100%;
-  display:block;
-}
-
-.hero-card .content{
-  padding:22px 24px;
-}
-
-.hero-card h2{
-  margin:0 0 8px;
-  font-size:20px;
-}
-
-.hero-card p{
-  margin:0;
-  font-size:14px;
-  color:#555;
-}
-
-/* ===== GRID ===== */
 .grid-wrapper{
   max-width:1100px;
   margin:0 auto 80px;
   padding:0 20px;
 }
 
-.year-group{
-  font-size:18px;
-  font-weight:700;
-  margin:50px 0 18px;
-  color:#444;
-  border-bottom:1px solid #e5e7eb;
-  padding-bottom:6px;
-}
-
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
-  gap:24px;
+  gap:30px;
 }
 
 .card{
   background:#fff;
+  padding:22px;
   border:1px solid #e5e7eb;
   text-decoration:none;
   color:#222;
-  display:block;
   transition:all .15s ease;
 }
 
 .card:hover{
-  border-color:#cbd5e1;
+  transform:translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,.06);
 }
 
 .card img{
   width:100%;
-  display:block;
+  margin-bottom:16px;
 }
 
-.card .content{
-  padding:18px 18px 20px;
-}
-
+.card h2,
 .card h3{
-  margin:0 0 8px;
-  font-size:16px;
+  margin:0 0 10px;
   font-weight:700;
+  font-size:18px;
 }
 
 .card p{
   margin:0;
-  font-size:13px;
-  color:#666;
+  color:#555;
+  font-size:14px;
   line-height:1.6;
 }
 
-/* ===== FOOTER ===== */
+.year-group{
+  font-size:20px;
+  font-weight:700;
+  margin:70px 0 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
 .footer{
-  background:linear-gradient(135deg,#1e1e1e,#2d2d2d);
-  color:#fff;
-  padding:60px 20px;
+  background:#111;
+  color:#ddd;
+  padding:50px 20px;
 }
 
 .footer-inner{
@@ -147,22 +144,21 @@ body{
   margin:0 auto;
 }
 
-.footer h2{
-  margin:0 0 20px;
-  font-size:32px;
-  letter-spacing:1px;
+.footer-logo{
+  height:40px;
+  margin-bottom:18px;
 }
 
 .footer p{
   margin:6px 0;
   font-size:14px;
-  opacity:0.85;
+  color:#aaa;
 }
 
-.footer .copyright{
-  margin-top:30px;
-  font-size:13px;
-  opacity:0.6;
+@media (max-width:768px){
+  .header-inner{
+    padding:0 16px;
+  }
 }
 </style>
 </head>
@@ -170,21 +166,24 @@ body{
 <body>
 
 <!-- HEADER -->
-<div class="header">
-  <img src="{{ '/assets/OSBC%20Logo_White.png' | relative_url }}">
-  <h1>OSBC LETTER</h1>
-  <p>공식 뉴스레터 아카이브</p>
+<div class="header" id="header">
+  <div class="header-inner">
+    <div class="header-left">
+      <img src="{{ '/assets/OSBC%20Logo_White.png' | relative_url }}">
+      <div class="header-title">OSBC LETTER</div>
+    </div>
+  </div>
 </div>
 
-<!-- HERO (최신글) -->
+<div class="main">
+
+<!-- 최신글 Hero -->
 {% assign latest = site.posts.first %}
 <div class="hero">
-  <a href="{{ latest.url | relative_url }}" class="hero-card">
+  <a href="{{ latest.url | relative_url }}" class="card">
     <img src="{{ latest.cover | relative_url }}">
-    <div class="content">
-      <h2>{{ latest.title }}</h2>
-      <p>{{ latest.summary }}</p>
-    </div>
+    <h2>{{ latest.title }}</h2>
+    <p>{{ latest.summary }}</p>
   </a>
 </div>
 
@@ -207,28 +206,39 @@ body{
 
   <a href="{{ post.url | relative_url }}" class="card">
     <img src="{{ post.cover | relative_url }}">
-    <div class="content">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.summary }}</p>
-    </div>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.summary }}</p>
   </a>
 
 {% endfor %}
 </div>
 </div>
 
+</div>
+
 <!-- FOOTER -->
 <div class="footer">
   <div class="footer-inner">
-    <h2>OSBC</h2>
+    <img class="footer-logo"
+    src="{{ '/assets/OSBC%20Logo_White.png' | relative_url }}">
+
     <p>오에스비씨(주)</p>
     <p>서울특별시 강남구 영동대로 511 (삼성동, 트레이드타워) 3306호</p>
-    <p>대표번호 02-538-9227  |  FAX 02-538-9228</p>
-    <div class="copyright">
-      Copyright (C) OSBC Inc. All rights reserved.
-    </div>
+    <p>대표번호 02-538-9227 | FAX 02-538-9228</p>
+    <p style="margin-top:20px;">Copyright (C) OSBC Inc. All rights reserved.</p>
   </div>
 </div>
+
+<script>
+window.addEventListener("scroll", function(){
+  const header = document.getElementById("header");
+  if(window.scrollY > 20){
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
+</script>
 
 </body>
 </html>
